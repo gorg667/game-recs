@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game Recs — Curated PC Game Recommendations</title>
+<meta name="description" content="A comprehensive, personalized PC game recommendation guide: 150+ hand-picked games across every genre with detailed write-ups, fit scores, co-op picks and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#" class="logo" id="logo"><span class="logo-icon">▶</span> Game<span>Recs</span></a>
+    <nav class="main-nav" id="main-nav">
+      <a href="#top-picks">Top Picks</a>
+      <a href="#library">Library</a>
+      <a href="#coop">Co-op</a>
+      <a href="#pvp">PvP</a>
+      <a href="#genres">Genres</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<section class="hero" id="hero">
+  <div class="container">
+    <p class="eyebrow">Personalized for a 9070 XT · 9950X · 64 GB PC — nothing is off the table</p>
+    <h1>Your definitive PC game guide</h1>
+    <p class="lead">Hand-picked across every genre, ranked against your priorities: <strong>gameplay → challenge → exploration → progression → creativity → story → atmosphere</strong>. Every entry has a full write-up, who-it's-for notes, time-to-beat, co-op info and a personal fit score.</p>
+    <div class="hero-stats" id="hero-stats"></div>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#top-picks">See the top picks</a>
+      <a class="btn btn-ghost" href="#library">Browse the full library</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="top-picks">
+  <div class="container">
+    <h2 class="section-title">🏆 Top Picks — start here</h2>
+    <p class="section-sub">The highest fit-score games for your profile. If you only play ten games from this site, play these.</p>
+    <div class="grid grid-featured" id="top-picks-grid"></div>
+  </div>
+</section>
+
+<section class="section alt" id="quick-lists">
+  <div class="container">
+    <h2 class="section-title">⚡ Quick lists by mood</h2>
+    <div class="mood-tabs" id="mood-tabs"></div>
+    <div class="mood-content" id="mood-content"></div>
+  </div>
+</section>
+
+<section class="section" id="library">
+  <div class="container">
+    <h2 class="section-title">📚 The full library</h2>
+    <p class="section-sub">Every recommendation. Filter by genre, mode, length, difficulty or search by name, developer or tag.</p>
+    <div class="filters" id="filters">
+      <input type="search" id="search" class="search" placeholder="Search games, tags, developers…" aria-label="Search">
+      <select id="f-genre"><option value="">All genres</option></select>
+      <select id="f-mode">
+        <option value="">Any mode</option>
+        <option value="single">Single-player</option>
+        <option value="coop">Co-op</option>
+        <option value="pvp">Competitive</option>
+      </select>
+      <select id="f-length">
+        <option value="">Any length</option>
+        <option value="short">Short (&lt;15h)</option>
+        <option value="medium">Medium (15–40h)</option>
+        <option value="long">Long (40–100h)</option>
+        <option value="endless">Endless (100h+)</option>
+      </select>
+      <select id="f-diff">
+        <option value="">Any difficulty</option>
+        <option value="1">Relaxed</option>
+        <option value="2">Moderate</option>
+        <option value="3">Challenging</option>
+        <option value="4">Hard</option>
+        <option value="5">Brutal</option>
+      </select>
+      <select id="f-sort">
+        <option value="fit">Sort: Fit score</option>
+        <option value="critic">Sort: Critic score</option>
+        <option value="year">Sort: Newest</option>
+        <option value="yearAsc">Sort: Oldest</option>
+        <option value="name">Sort: A–Z</option>
+        <option value="length">Sort: Length</option>
+      </select>
+      <button class="btn btn-small" id="clear-filters">Reset</button>
+    </div>
+    <div class="tag-cloud" id="tag-cloud"></div>
+    <p class="results-count" id="results-count"></p>
+    <div class="grid" id="library-grid"></div>
+  </div>
+</section>
+
+<section class="section alt" id="coop">
+  <div class="container">
+    <h2 class="section-title">🤝 Co-op with your PC friends</h2>
+    <p class="section-sub">Sorted by player count. Every one of these is best experienced with a group.</p>
+    <div id="coop-groups"></div>
+  </div>
+</section>
+
+<section class="section" id="pvp">
+  <div class="container">
+    <h2 class="section-title">⚔️ Competitive multiplayer</h2>
+    <p class="section-sub">Deep skill ceilings, healthy player bases, and high-refresh friendly — your hardware will crush all of these.</p>
+    <div class="grid" id="pvp-grid"></div>
+  </div>
+</section>
+
+<section class="section alt" id="genres">
+  <div class="container">
+    <h2 class="section-title">🧭 Genre guides</h2>
+    <p class="section-sub">What each genre offers, why it might click with your priorities, and the best entry points.</p>
+    <div class="genre-guides" id="genre-guides"></div>
+  </div>
+</section>
+
+<section class="section" id="roadmap">
+  <div class="container">
+    <h2 class="section-title">🗺️ Suggested play order</h2>
+    <p class="section-sub">A 12-month roadmap that alternates genres and lengths so nothing burns you out. Roughly 10–15 hrs/week.</p>
+    <div class="roadmap" id="roadmap-list"></div>
+  </div>
+</section>
+
+<section class="section alt" id="hardware">
+  <div class="container">
+    <h2 class="section-title">🖥️ Making the most of your rig</h2>
+    <div class="cards-3" id="hardware-tips"></div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="container">
+    <h2 class="section-title">❓ FAQ & methodology</h2>
+    <div class="faq" id="faq-list"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Built for gorg667 · Hosted on GitHub Pages · Data lives in <code>data/games.json</code> — edit it to add your own picks.</p>
+    <p class="small">Scores are subjective. Critic scores are approximate Metacritic/OpenCritic ranges at time of writing. Prices change; check Steam.</p>
+  </div>
+</footer>
+
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modal-backdrop" id="modal-backdrop"></div>
+  <div class="modal-dialog" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<button class="back-top" id="back-top" aria-label="Back to top">↑</button>
+
+<script src="js/data-content.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
