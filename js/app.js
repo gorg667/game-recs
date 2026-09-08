@@ -5,6 +5,26 @@
   const WEIGHTS = { gameplay: 0.26, challenge: 0.18, exploration: 0.16, progression: 0.14, creativity: 0.11, story: 0.08, atmosphere: 0.07 };
   const AXES = Object.keys(WEIGHTS);
 
+  // Canonical genre buckets for the filter dropdown (cards still show granular genre labels)
+  const GENRE_MAP = {
+    'Action RPG':'Action RPG', 'Soulslike':'Soulslike', 'RPG':'RPG', 'CRPG':'RPG', 'JRPG':'RPG', 'Sandbox RPG':'RPG',
+    'FPS':'Shooter', 'Tactical FPS':'Shooter', 'Hero Shooter':'Shooter', 'Co-op Shooter':'Shooter', 'Third-person Shooter':'Shooter', 'Battle Royale':'Shooter', 'Large-scale':'Shooter',
+    'Action':'Action', 'Character Action':'Action', 'Hack and Slash':'Action', 'Action Adventure':'Action', 'Third-person':'Action', 'Melee':'Action', 'Rhythm':'Action',
+    'Roguelike':'Roguelike', 'Bullet Hell':'Roguelike', 'Twin-stick':'Roguelike',
+    'Deckbuilder':'Deckbuilder', 'Tower Defense':'Deckbuilder',
+    'Strategy':'Strategy', '4X':'Strategy', 'RTS':'Strategy', 'Grand Strategy':'Strategy', 'Turn-based':'Strategy', 'Tactics':'Tactics',
+    'City Builder':'Builder / Colony Sim', 'Colony Sim':'Builder / Colony Sim', 'Economy':'Builder / Colony Sim', 'Story Generator':'Builder / Colony Sim',
+    'Automation':'Automation', 'Simulation':'Simulation', 'Racing':'Racing', 'Arcade':'Racing', 'Vehicles':'Sports', 'Sports':'Sports',
+    'Fighting':'Fighting', 'MOBA':'MOBA', 'Competitive':'Competitive',
+    'Puzzle':'Puzzle', 'Deduction':'Puzzle', 'Mystery':'Puzzle', 'Philosophy':'Puzzle',
+    'Exploration':'Exploration', 'Adventure':'Exploration', 'Open World':'Open World',
+    'Survival':'Survival / Crafting', 'Crafting':'Survival / Crafting', 'Sandbox':'Survival / Crafting', 'Zombie':'Survival / Crafting', 'Underwater':'Survival / Crafting', 'Farming Sim':'Life Sim', 'Life Sim':'Life Sim',
+    'Horror':'Horror', 'Survival Horror':'Horror', 'Co-op Horror':'Horror', 'Investigation':'Horror',
+    'Metroidvania':'Metroidvania', 'Platformer':'Platformer',
+    'Immersive Sim':'Immersive Sim', 'Stealth':'Immersive Sim',
+    'Co-op':'Co-op', 'Loot':'ARPG / Loot', 'ARPG':'ARPG / Loot', 'Live Service':'Live Service', 'Hunting':'Action RPG',
+    'Story':'Story-driven', 'VR':'VR', 'Indie':'Indie', 'Sci-Fi':'Sci-Fi', 'Fantasy':'Fantasy', 'Historical':'Historical', 'Medieval':'Historical', 'Physics':'Physics', 'Destruction':'Physics', 'Anime':'Fighting', '3D':'Fighting'
+  };
   const GAMES = (window.GAMES || []).map(normalize);
   const C = window.CONTENT || {};
   const $ = (s, r = document) => r.querySelector(s);
@@ -23,6 +43,7 @@
     g.modes = g.modes || ['single'];
     g.tags = g.tags || [];
     g.id = g.id || g.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    g.genreBuckets = [...new Set(g.genres.map(x => GENRE_MAP[x] || x))];
     return g;
   }
 
@@ -60,7 +81,7 @@
   /* ---------- HERO STATS ---------- */
   function renderStats() {
     const s = $('#hero-stats'); if (!s) return;
-    const genres = new Set(GAMES.flatMap(g => g.genres));
+    const genres = new Set(GAMES.flatMap(g => g.genreBuckets));
     const coop = GAMES.filter(g => g.modes.includes('coop')).length;
     const hours = GAMES.reduce((a, g) => a + Math.min(g.hours, 150), 0);
     [[GAMES.length, 'games reviewed'], [genres.size, 'genres covered'], [coop, 'co-op picks'], [`${Math.round(hours / 100) / 10}k+`, 'hours of play']]
@@ -96,7 +117,9 @@
   function renderLibrary() {
     const grid = $('#library-grid'); if (!grid) return;
     const genreSel = $('#f-genre');
-    [...new Set(GAMES.flatMap(g => g.genres))].sort().forEach(x => genreSel.appendChild(new Option(x, x)));
+    const bucketCounts = {};
+    GAMES.forEach(g => g.genreBuckets.forEach(b => bucketCounts[b] = (bucketCounts[b] || 0) + 1));
+    Object.keys(bucketCounts).sort().forEach(x => genreSel.appendChild(new Option(`${x} (${bucketCounts[x]})`, x)));
     const tagCounts = {};
     GAMES.forEach(g => g.tags.forEach(t => tagCounts[t] = (tagCounts[t] || 0) + 1));
     const cloud = $('#tag-cloud');
@@ -115,7 +138,7 @@
     apply();
     function apply() {
       let list = GAMES.filter(g =>
-        (!state.genre || g.genres.includes(state.genre)) &&
+        (!state.genre || g.genreBuckets.includes(state.genre)) &&
         (!state.mode || g.modes.includes(state.mode)) &&
         (!state.length || g.lengthBucket === state.length) &&
         (!state.diff || g.difficulty === +state.diff) &&
