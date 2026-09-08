@@ -49,5 +49,5 @@ Fit score computed in app.js from ratings × user priority weights + critic nudg
 - games-3.js DONE (26 games): Strategy / 4X / RTS / tactics / management / automation
 - games-4.js DONE (15 games): Roguelikes / deckbuilders / indie gameplay-first (Hades, Slay the Spire, Balatro, Noita...)
 - games-5.js + games-5b.js DONE (17 games): Metroidvania / platformer / puzzle / survival-crafting / sandbox (Hollow Knight, Silksong, Celeste, Valheim, Terraria...)
-- games-6.js: Co-op party / PvP / racing / misc (Helldivers 2, Deep Rock, Lethal Company, CS2, Rocket League...)
+- games-6.js + games-6b.js DONE (29 games): Survival, co-op party, ARPG, JRPG, racing, fighting, horror / PvP / racing / misc (Helldivers 2, Deep Rock, Lethal Company, CS2, Rocket League...)
 - js/data-content.js: moods, genreGuides, roadmap, hardware, faq (references game ids)
