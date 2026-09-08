@@ -1,15 +1,15 @@
 /* GameRecs app — renders everything from window.GAMES + window.CONTENT (js/data-content.js, data/games-*.js) */
 (function () {
   'use strict';
+  // Priority weights from user profile: gameplay > challenge > exploration > progression > creativity > story > atmosphere
+  const WEIGHTS = { gameplay: 0.26, challenge: 0.18, exploration: 0.16, progression: 0.14, creativity: 0.11, story: 0.08, atmosphere: 0.07 };
+  const AXES = Object.keys(WEIGHTS);
+
   const GAMES = (window.GAMES || []).map(normalize);
   const C = window.CONTENT || {};
   const $ = (s, r = document) => r.querySelector(s);
   const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-
-  // Priority weights from user profile: gameplay > challenge > exploration > progression > creativity > story > atmosphere
-  const WEIGHTS = { gameplay: 0.26, challenge: 0.18, exploration: 0.16, progression: 0.14, creativity: 0.11, story: 0.08, atmosphere: 0.07 };
-  const AXES = Object.keys(WEIGHTS);
 
   function normalize(g) {
     const r = g.ratings || {};
