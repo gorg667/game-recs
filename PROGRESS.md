@@ -45,7 +45,7 @@ Fit score computed in app.js from ratings × user priority weights + critic nudg
 
 ## Batch plan
 - games-1.js DONE: Action RPG / Soulslike / Open world (15 games)
-- games-2.js: Shooters (SP + co-op + PvP), immersive sims
+- games-2.js DONE (25 games): Shooters (SP + co-op + PvP), immersive sims
 - games-3.js: Strategy / 4X / RTS / tactics / management / automation
 - games-4.js: Roguelikes / deckbuilders / indie gameplay-first (Hades, Slay the Spire, Balatro, Noita...)
 - games-5.js: Metroidvania / platformer / puzzle / survival-crafting / sandbox (Hollow Knight, Silksong, Celeste, Valheim, Terraria...)
