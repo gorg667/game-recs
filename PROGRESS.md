@@ -12,7 +12,17 @@ Repo: https://github.com/gorg667/game-recs (push straight to `main`, NO branches
 
 ## Status log
 - [2026-09-08] Repo initialized, GitHub auth set up. Created PROGRESS.md. Asked user the intake questions (see below).
-- NEXT: wait for user answers -> record them in `docs/USER_PROFILE.md` -> design site -> build -> push -> enable GH Pages.
+- [2026-09-08] User answered (docs/USER_PROFILE.md). Built full site: index.html, css/style.css, js/app.js, js/data-content.js, js/data-content-2.js, data/games-{1,2,3,4,5,5b,6,6b}.js = 128 games. All id refs validated (node script). Browser-tested: zero console errors.
+- [2026-09-08] Fixed TDZ bug (AXES before init), added favicon, .nojekyll, genre bucket map (36 buckets), README.
+- GH Pages: API returned 403 (token lacks pages admin). USER MUST enable in repo Settings > Pages > main / root. Instructions in README.
+- STATE: SITE IS COMPLETE AND PUSHED. Any further work = enhancements only.
+
+## Possible enhancements (if user asks / has credits)
+- More games (Black Myth Wukong, Control, Sea of Thieves, Palworld, Hell Let Loose, Squad, Vermintide done, Titanfall done...)
+- "My backlog" checkbox per game persisted in localStorage + export
+- Compare two games side by side
+- Sort/filter by price; "on Game Pass" flag
+- Per-game cover art (would need licensing care; currently uses gradient banners deliberately)
 
 ## Intake questions asked (Q1-Q12)
 1. Platforms owned / PC specs
