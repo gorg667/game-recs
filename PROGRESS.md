@@ -35,3 +35,19 @@ Repo: https://github.com/gorg667/game-recs (push straight to `main`, NO branches
 
 ## Decisions
 (none yet beyond the above)
+
+## Data schema (data/games-N.js — each pushes into window.GAMES)
+id, title, year, developer, genres[], modes[single|coop|pvp], players (label), playersMax (int, for co-op grouping),
+hours (int, for length bucket), difficulty 1-5, critic (metacritic-ish), price, colors[2 hex] (card gradient),
+tags[], ratings{gameplay,challenge,exploration,progression,creativity,story,atmosphere} 1-10,
+short, verdict, description, why, caveats, tips[], similar[ids]
+Fit score computed in app.js from ratings × user priority weights + critic nudge.
+
+## Batch plan
+- games-1.js DONE: Action RPG / Soulslike / Open world (15 games)
+- games-2.js: Shooters (SP + co-op + PvP), immersive sims
+- games-3.js: Strategy / 4X / RTS / tactics / management / automation
+- games-4.js: Roguelikes / deckbuilders / indie gameplay-first (Hades, Slay the Spire, Balatro, Noita...)
+- games-5.js: Metroidvania / platformer / puzzle / survival-crafting / sandbox (Hollow Knight, Silksong, Celeste, Valheim, Terraria...)
+- games-6.js: Co-op party / PvP / racing / misc (Helldivers 2, Deep Rock, Lethal Company, CS2, Rocket League...)
+- js/data-content.js: moods, genreGuides, roadmap, hardware, faq (references game ids)
